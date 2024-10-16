@@ -29,41 +29,42 @@ class HashTable:
 
     def keys(self):
         allkes = []
-        for nodes in enumerate(self.data_map):
-            if nodes[1] is not None:
-                for node in enumerate(nodes[1]):
-                    allkes.append(node[1][0])
+        for i,nodes in enumerate(self.data_map):
+            if nodes is not None:
+                for j,node in enumerate(nodes):
+                    allkes.append(node[0])
         return allkes
 
 
 def item_in_common1(list1, list2):
-        table = HashTable()
-        for item in list1:
-            table.set(str(item), True)
+    table = HashTable()
+    for item in list1:
+        table.set(str(item), True)
 
-        for item in list2:
-            if table.get(str(item)) is True:
-                return True
-        return False
+    for item in list2:
+        if table.get(str(item)) is True:
+            return True
+    return False
 
 
 def item_in_common(list1, list2):
     my_dic = {}
-    for i,item in list1:
+    for i,item in enumerate(list1):
         my_dic[i] = True
     for i in list2:
-         if i in my_dic:
-             return True
+        if i in my_dic:
+            return True
     return False
-# my_table = HashTable()
-# my_table.set("bolts", 1400)
-# my_table.set("washres", 50)
-# my_table.set("lumber", 70)
+my_table = HashTable()
+my_table.set("bolts", 1400)
+my_table.set("washres", 50)
+my_table.set("lumber", 70)
 # # print(my_table.get("ali"))
 # # print(my_table.get("alii"))
 # # print(my_table.get("al2222i"))
-# print(my_table.keys())
+print(my_table.keys())
 
-list1=[1,2,3]
-list2=[4,5,6]
-print(item_in_common(list1,list2))
+
+# list1 = [1, 2, 3]
+# list2 = [4, 5, 6]
+# print(item_in_common(list1, list2))
