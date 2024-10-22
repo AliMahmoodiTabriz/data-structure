@@ -72,7 +72,7 @@ class BinarySearchTree:
         if current_node == None:
             return None
 
-        if value > current_node.value :
+        if value > current_node.value:
             current_node.right = self.__delete_node(current_node.right, value)
         elif value < current_node.value:
             current_node.left = self.__delete_node(current_node.left, value)
@@ -99,15 +99,92 @@ class BinarySearchTree:
             current_node = current_node.left
         return current_node.value
 
+    def BFS(self):
+        cureent_node = self.root
+        queue = []
+        result = []
+        queue.append(cureent_node)
+        while len(queue) > 0:
+            cureent_node = queue.pop(0)
+            result.append(cureent_node.value)
+            if cureent_node.left:
+                queue.append(cureent_node.left)
+            if cureent_node.right:
+                queue.append(cureent_node.right)
+        return result
 
-my_BST = BinarySearchTree()
-my_BST.insert(47)
-my_BST.insert(21)
-my_BST.insert(76)
-my_BST.insert(18)
-my_BST.insert(27)
-my_BST.insert(52)
-my_BST.insert(82)
-my_BST.delete_node(18)
-print(my_BST.min_value(my_BST.root))
-#print(my_BST.min_value(my_BST.root.right))
+    def DFS_pre_order(self):
+        result = []
+
+        def travers(current_node):
+            result.append(current_node.value)
+            if current_node.left:
+                travers(current_node.left)
+            if current_node.right:
+                travers(current_node.right)
+
+        travers(self.root)
+        return result
+
+    def DFS_post_order(self):
+        result = []
+
+        def travers(current_node):
+            if current_node.left:
+                travers(current_node.left)
+            if current_node.right:
+                travers(current_node.right)
+            result.append(current_node.value)
+
+        travers(self.root)
+        return result
+
+    def DFS_inorder(self):
+        result = []
+
+        def travers(current_node):
+            if current_node.left:
+                travers(current_node.left)
+            result.append(current_node.value)
+            if current_node.right:
+                travers(current_node.right)
+        travers(self.root)
+        return result
+
+    def kth_smallest(self, kth):
+        if self.root is None:
+            return None
+        if kth < 1:
+            return None
+        
+        result = []
+        def travers(current_node):
+            if current_node.left:
+                travers(current_node.left)
+            result.append(current_node.value)
+            if len(result) >= kth:
+                return result[kth-1]
+            if current_node.right:
+                return travers(current_node.right)
+            
+        return travers(self.root)
+
+
+bst = BinarySearchTree()
+
+bst.insert(5)
+bst.insert(3)
+bst.insert(7)
+bst.insert(2)
+bst.insert(4)
+bst.insert(6)
+bst.insert(8)
+
+print(bst.kth_smallest(1))  # Expected output: 2
+print(bst.kth_smallest(3))  # Expected output: 4
+print(bst.kth_smallest(6))  # Expected output: 7
+
+# print(bst.BFS())
+# print(bst.DFS_pre_order())
+# print(bst.DFS_post_order())
+# print(bst.DFS_inorder())
