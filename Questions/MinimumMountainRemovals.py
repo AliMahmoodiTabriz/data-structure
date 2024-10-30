@@ -1,28 +1,3 @@
-def minimumMountainRemovalsNsqure(nums):
-    n = len(nums)
-
-    # Step 1: Calculate left (longest increasing subsequence up to each index)
-    left = [1] * n
-    for i in range(1, n):
-        for j in range(i):
-            if nums[i] > nums[j]:
-                left[i] = max(left[i], left[j] + 1)
-
-    # Step 2: Calculate right (longest decreasing subsequence from each index)
-    right = [1] * n
-    for i in range(n - 2, -1, -1):
-        for j in range(i + 1, n):
-            if nums[i] > nums[j]:
-                right[i] = max(right[i], right[j] + 1)
-
-    # Step 3: Find maximum mountain length
-    max_mountain_len = 0
-    for i in range(1, n - 1):
-        if left[i] > 1 and right[i] > 1:  # Valid peak
-            max_mountain_len = max(max_mountain_len, left[i] + right[i] - 1)
-
-    # Step 4: Minimum removals to make the array a mountain
-    return n - max_mountain_len
 def minimumMountainRemovals(nums):
     import bisect
 
