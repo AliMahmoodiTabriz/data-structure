@@ -27,13 +27,13 @@ def addTwoNumbers(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[Li
         strL2 += str(queue2.pop().val)
     sum = int(strL1) + int(strL2)
 
-    head = ListNode(int(str(sum)[len(str(sum))-1]))
+    head = ListNode(0)
     temp = head
-    for i in range(len(str(sum))-2, -1, -1):
+    for i in range(len(str(sum))-1, -1, -1):
         temp.next = ListNode(int(str(sum)[i]))
         temp = temp.next
 
-    return head
+    return head.next
 
 
 def addTwoNumber(l1: ListNode, l2: ListNode) -> ListNode:
@@ -65,7 +65,12 @@ l2 = ListNode(5)
 l2.next = ListNode(6)
 l2.next.next = ListNode(4)
 l2.next.next.next = ListNode(9)
-head = addTwoNumber(l1, l2)
+head = addTwoNumbers(l1, l2)
+head2 = addTwoNumber(l1, l2)
 while head:
-    print(head.val)
+    print(head.val) 
     head = head.next
+print("---------------") 
+while head2:
+    print(head2.val) 
+    head2 = head2.next
