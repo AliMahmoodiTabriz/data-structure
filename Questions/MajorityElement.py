@@ -5,7 +5,8 @@ def majorityElement(nums: list[int]) -> int:
     for num in nums:
         my_dic[num] = my_dic.get(num, 0) + 1
         if my_dic[num] > mid:
-            return num 
+            return num
+
 
 def MajorityElement(nums: list[int]) -> int:
     count = 0
@@ -18,8 +19,9 @@ def MajorityElement(nums: list[int]) -> int:
 
     return candidate
 
+
 arr = [3, 2, 3]
-arr1 = [2, 2, 1, 1, 1, 2, 2]
+arr1 = [2, 2, 1, 1,  1, 2, 2]
 arr2 = [1]
 print(majorityElement(arr))
 print(majorityElement(arr1))
